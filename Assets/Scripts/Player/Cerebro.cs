@@ -55,32 +55,28 @@ public class Cerebro : MonoBehaviour
     Vector3 jumpDirection = Vector3.zero;
 
     StatusEnum status;
-    private void Awake()
-    {
-        //Texture2D loadedTexture = Resources.Load<Texture2D>("graffitiTexture");
-        //Material graffitiMaterial = selectedGraffiti.GetComponent<Renderer>().sharedMaterial;
-        //graffitiMaterial.SetTexture("_EmissionMap", loadedTexture);
-        
-    }
-    public Texture2D t_static_tx = null; public Texture2D t_dynamic_tx = null; public WWW t_load = null;
+
+    private Texture2D t_static_tx = null;
+    private Texture2D t_dynamic_tx = null;
+    private WWW t_load = null;
 
     void OnGUI()
     {
-        GUI.Label(new Rect(100, 200, 64, 64), "TESTING"); 
-        GUI.Label(new Rect(164, 200, 64, 64), t_static_tx); 
-        if (t_load == null) { 
-            Debug.Log("Application data path: " + Application.dataPath); 
+        
+        if (t_load == null)
+        {
+            Debug.Log("Application data path: " + Application.dataPath);
             string targetFile = "file://" + Application.dataPath + "/Resources/graffitiTexture.png";
-            Debug.Log("Beginning load at time: " + Time.time); 
-            t_load = new WWW(targetFile); 
-        } else if (t_load.isDone && t_dynamic_tx == null) {
-            Debug.Log("File has finished being loaded at " + Time.time); 
-            t_dynamic_tx = new Texture2D(64, 64); 
-            Debug.Log("Preparing to load PNG into Texture"); 
-            t_load.LoadImageIntoTexture(t_dynamic_tx); 
-            Debug.Log("Loaded image into texture"); 
-        } else { 
-            GUI.Label(new Rect(164, 264, 64, 64), t_dynamic_tx); 
+            Debug.Log("Beginning load at time: " + Time.time);
+            t_load = new WWW(targetFile);
+        }
+        else if (t_load.isDone && t_dynamic_tx == null)
+        {
+            Debug.Log("File has finished being loaded at " + Time.time);
+            t_dynamic_tx = new Texture2D(64, 64);
+            Debug.Log("Preparing to load PNG into Texture");
+            t_load.LoadImageIntoTexture(t_dynamic_tx);
+            Debug.Log("Loaded image into texture");
         }
         Material graffitiMaterial = selectedGraffiti.GetComponent<Renderer>().sharedMaterial;
         graffitiMaterial.SetTexture("_EmissionMap", t_dynamic_tx);
