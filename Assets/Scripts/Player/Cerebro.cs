@@ -384,7 +384,6 @@ public class Cerebro : MonoBehaviour
         //Este codigo es una poronga, pero no hay tiempo para mejorarlo, dios esos ifff malisimos
         RaycastHit hit;
         bool isHitting = Physics.Raycast(playerCamera.transform.position, playerCamera.transform.forward, out hit, 2f);
-        Debug.Log(hit.transform.gameObject.layer);
         if (isHitting && hit.transform.gameObject.layer == LayerMask.NameToLayer("GraffitiWallBig"))
         {
             Vector3 asd = new Vector3(0,0,1);
